@@ -1,0 +1,30 @@
+<h1>Password Generator</h1>
+
+<div>
+  <label>Enter Length </label>
+  <input (input)="updateLength($event.target.value)" />
+</div>
+
+<div>
+  <label for="">Use Letters</label>
+  <input (change)="toggleUseLetters()" [checked]="useLetters" type="checkbox" />
+</div>
+
+<div>
+  <label for="">Use Numbers</label>
+  <input (change)="toggleUseNumbers()" [checked]="useNumbers" type="checkbox" />
+</div>
+
+<div>
+  <label for="">Use Symbols</label>
+  <input (change)="toggleUseSymbols()" [checked]="useSymbols" type="checkbox" />
+</div>
+
+<div>
+  <button (click)="onButtonClick()">Generate!</button>
+</div>
+
+<div>
+  <label for="">Your Password </label>
+  <input type="text" [value]="password" />
+</div>
