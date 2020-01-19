@@ -1,0 +1,30 @@
+<nav>
+  <ul class="pagination">
+    <li class="page-item" [appClass]="{ disabled: currentImage === 0 }">
+      <a (click)="currentImage = currentImage - 1" class="page-link">Prev</a>
+    </li>
+
+    <!-- how to use multiple structural directives on one element -->
+    <ng-container *ngFor="let image of images; let i = index">
+      <li
+        class="page-item"
+        [appClass]="{ active: i === currentImage }"
+        *ngIf="isWithinOffset(i)"
+      >
+        <a (click)="currentImage = i" class="page-link">{{ i + 1 }}</a>
+      </li>
+    </ng-container>
+
+    <li
+      class="page-item"
+      [appClass]="{ disabled: currentImage === images.length - 1 }"
+    >
+      <a (click)="currentImage = currentImage + 1" class="page-link">Next</a>
+    </li>
+  </ul>
+</nav>
+
+<div>
+  <h4>{{ images[currentImage].title }}</h4>
+  <img [src]="images[currentImage].url" />
+</div>
