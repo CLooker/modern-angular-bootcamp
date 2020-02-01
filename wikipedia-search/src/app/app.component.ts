@@ -12,8 +12,8 @@ export class AppComponent {
   constructor(private wikipediaService: WikipediaService) {}
 
   onSubmittedSearch(term: string) {
-    this.wikipediaService.search(term).subscribe((response: any) => {
-      this.pages = response.query.search;
+    this.wikipediaService.search(term).subscribe(results => {
+      this.pages = results;
     });
   }
 }
