@@ -9,12 +9,21 @@ import * as get from 'lodash.get';
 })
 export class CardFormComponent implements OnInit {
   cardForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(3)])
+    cardNumber: new FormControl(''),
+    expiration: new FormControl(''),
+    name: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(5)
+    ]),
+    securityCode: new FormControl('')
   });
 
-  constructor() {
-    console.log(this.cardForm.get('name'));
-  }
+  constructor() {}
 
   ngOnInit() {}
+
+  onSubmit() {
+    console.log('form was submitted');
+  }
 }
