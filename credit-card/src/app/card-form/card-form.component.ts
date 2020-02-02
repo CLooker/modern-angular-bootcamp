@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import * as get from 'lodash.get';
+import { DateFormControl } from '../date-form-control';
 
 @Component({
   selector: 'app-card-form',
@@ -9,19 +9,29 @@ import * as get from 'lodash.get';
 })
 export class CardFormComponent implements OnInit {
   cardForm = new FormGroup({
-    cardNumber: new FormControl(''),
-    expiration: new FormControl(''),
-    name: new FormControl('', [
+    cardNumber: new FormControl('', [
+      Validators.required,
+      Validators.minLength(16),
+      Validators.maxLength(16)
+    ]),
+    expiration: new DateFormControl('', [
+      Validators.pattern(/^(0[1-9]|1[0-2])\/\d{2}$/)
+    ]),
+    name: new FormControl('', [Validators.required]),
+    securityCode: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
-      Validators.maxLength(5)
-    ]),
-    securityCode: new FormControl('')
+      Validators.maxLength(3)
+    ])
   });
 
   constructor() {}
 
   ngOnInit() {}
+
+  onResetClick() {
+    this.cardForm.reset();
+  }
 
   onSubmit() {
     console.log('form was submitted');
